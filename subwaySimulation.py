@@ -157,13 +157,13 @@ next_station = {
     (station_C, line_4): station_B,
 }
 
-# Print the optimal policy from station_B to station_D
-s = station_A
+# Print the optimal policy from source station to station_D
+current_station = station_C
 visited_stations = set()
-while s != station_D:
-    if s in visited_stations:
+while current_station != station_D:
+    if current_station in visited_stations:
         print("Infinite loop detected in policy. Please check your MDP parameters.")
         break
-    visited_stations.add(s)
-    print(f"In {s}, take {policy[s]}")
-    s = next_station[(s, policy[s])]
+    visited_stations.add(current_station)
+    print(f"In {current_station}, take {policy[current_station]}")
+    current_station = next_station[(current_station, policy[current_station])]
