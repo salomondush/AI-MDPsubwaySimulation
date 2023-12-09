@@ -1,48 +1,17 @@
 import math
 import numpy as np
-
-class SubwayStation:
-    def __init__(self, name, latitude, longitude):
-        self.name = name
-        self.lines = []
-        self.latitude = latitude
-        self.longitude = longitude
-        self.grid_point = self.calculate_grid_point()
-
-    def __str__(self):
-        return self.name
-        
-    # Convert geographical coordinates to grid points (haversine formula)
-
-    def calculate_grid_point(self):
-        R = 6371  # Earth radius in kilometers
-        lat_rad = math.radians(self.latitude)
-        lon_rad = math.radians(self.longitude)
-        
-        x = R * math.cos(lat_rad) * math.cos(lon_rad)
-        y = R * math.cos(lat_rad) * math.sin(lon_rad)
-
-        return x, y
-    
-class SubwayLine:
-    def __init__(self, name, delay_prob):
-        self.name = name
-        self.delay_prob = delay_prob
-
-    def __str__(self):
-        return self.name
-    
+import subwayClass as sc
 # Subway stations
-coney_island = SubwayStation("Coney Island Station", 40.577760430189656, -73.97999295649412)
-j_st_metro_tech = SubwayStation("Jay Street Metro Tech Station", 40.69204758503175, -73.98498376782335)
-w_4_st_wash_sq = SubwayStation("West 4th Street Washington Square", 40.73253311848584, -74.00044235617023)
-one_four_5 = SubwayStation("145th Street", 40.83419374298584, -73.94926049155865)
-herald_sq = SubwayStation("34th Street Herald Square", 40.749842751497916, -73.98762350805688)
-times_sq = SubwayStation("Times Square - 42nd Street", 40.75605614948771, -73.98710391552848)
-canal_st = SubwayStation("Canal Street", 40.719700439317876, -74.00143758220091)
-union_sq = SubwayStation("14th Street Union Square", 40.73467894122143, -73.99035475962178)
-rock_ctr = SubwayStation("47th-50th Streets Rockefeller Center", 40.759045012104984, -73.98108954399662)
-de_kal = SubwayStation("De Kalb Avenue", 40.69182616993852, -73.97380877906623)
+coney_island = sc.SubwayStation("Coney Island Station", 40.577760430189656, -73.97999295649412)
+j_st_metro_tech = sc.SubwayStation("Jay Street Metro Tech Station", 40.69204758503175, -73.98498376782335)
+w_4_st_wash_sq = sc.SubwayStation("West 4th Street Washington Square", 40.73253311848584, -74.00044235617023)
+one_four_5 = sc.SubwayStation("145th Street", 40.83419374298584, -73.94926049155865)
+herald_sq = sc.SubwayStation("34th Street Herald Square", 40.749842751497916, -73.98762350805688)
+times_sq = sc.SubwayStation("Times Square - 42nd Street", 40.75605614948771, -73.98710391552848)
+canal_st = sc.SubwayStation("Canal Street", 40.719700439317876, -74.00143758220091)
+union_sq = sc.SubwayStation("14th Street Union Square", 40.73467894122143, -73.99035475962178)
+rock_ctr = sc.SubwayStation("47th-50th Streets Rockefeller Center", 40.759045012104984, -73.98108954399662)
+de_kal = sc.SubwayStation("De Kalb Avenue", 40.69182616993852, -73.97380877906623)
 
 subway_stations = [coney_island, j_st_metro_tech, w_4_st_wash_sq, one_four_5, herald_sq, times_sq, canal_st, union_sq, rock_ctr, de_kal]
 # Subway lines
@@ -100,14 +69,17 @@ transition_probs = {
 
     #From DeKalb Ave
 }
+
 # Rewards with distance-based adjustment
-rewards = {
-    (current_station, line, next_station): distance_adjustment
-    for (current_station, line, next_station) in transition_probs.keys()
-    for distance_adjustment in [
-        -np.linalg.norm(np.array(next_station.grid_point) - np.array(current_station.grid_point)) / 10.0
-    ]
-}
+# rewards = {
+#     (current_station, line, next_station): base_reward + distance_adjustment
+#     for (current_station, line, next_station), base_reward in rewards.items()
+#     for line in current_station.lines
+#     for distance_adjustment in [
+#         np.linalg.norm(np.array(next_station.grid_point) - np.array(current_station.grid_point)) / 10.0
+#     ]
+# }
+
 
 # We selected an intermediate discount factor (around 0.5 to 0.8) to balance 
 # the consideration of both short-term and long-term rewards.
@@ -215,7 +187,6 @@ next_station = {
     
     (de_kal, line_q): coney_island,
 }
-
 # Print the optimal policy from station_A to station_D
 s = station_A
 visited_stations = set()
