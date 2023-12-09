@@ -15,10 +15,10 @@ de_kal = sc.SubwayStation("De Kalb Avenue", 40.69182616993852, -73.9738087790662
 
 subway_stations = [coney_island, j_st_metro_tech, w_4_st_wash_sq, one_four_5, herald_sq, times_sq, canal_st, union_sq, rock_ctr, de_kal]
 # Subway lines
-line_f = sc.SubwayLine("Line F")
-line_ac = sc.SubwayLine("Line_AC")
-line_q = sc.SubwayLine("Line_Q")
-line_n = sc.SubwayLine("Line_N")
+line_f = SubwayLine("Line F", 0.3)
+line_ac = SubwayLine("Line_AC", 0.28)
+line_q = SubwayLine("Line_Q", 0.2)
+line_n = SubwayLine("Line_N", 0.29)
 subway_lines = [line_f, line_ac, line_q, line_n]
 
 # Connecting stations with lines (sample connections)
@@ -28,7 +28,7 @@ w_4_st_wash_sq.lines = [line_ac, line_f]
 one_four_5.lines = [line_ac]
 herald_sq.lines = [line_f, line_q, line_n]
 times_sq.lines = [line_n, line_q]
-canal_st.lines = [line_n]
+canal_st.lines = [line_n, line_q]
 union_sq.lines = [line_q, line_n]
 rock_ctr.lines = [line_f]
 de_kal.lines = [line_q]
@@ -41,18 +41,33 @@ de_kal.lines = [line_q]
 # delay, signal malfunction, or any conceivable reason that makes this problem stochastic (as it is in real life).
 transition_probs = {
     # From Coney Island
-    (coney_island, line_f, j_st_metro_tech): 0.9,
-    (coney_island, line_f, coney_island): 0.1,
-    (coney_island, line_ac, herald_sq): 0.8,
-    (coney_island, line_ac, coney_island): 0.2,
-    (coney_island, line_q, canal_st): 0.9,
-    (coney_island, line_q, coney_island): 0.1,
+    (coney_island, line_f, j_st_metro_tech): 1-line_f.delay_prob,
+    (coney_island, line_f, coney_island): line_f.delay_prob,
+    
+    (coney_island, line_q, de_kal): 1-line_q.delay_prob,
+    (coney_island, line_q, coney_island): line_q.delay_prob,
     # From Jay Street Metro Tech
     (j_st_metro_tech, line_f, coney_island): 0.7,
     (j_st_metro_tech, line_f, j_st_metro_tech): 0.3,
+
     (j_st_metro_tech, line_ac, herald_sq): 0.6,
     (j_st_metro_tech, line_ac, j_st_metro_tech): 0.4,
-    # Continue with similar updates for other stations and lines...
+    # From West 4th Street-Washington Square Park
+
+
+    #From 145th Street
+
+    #From Herald Square
+
+    #From Times Square
+
+    #From Canal Street
+
+    #From Union Square
+
+    #From Rockefeller Center
+
+    #From DeKalb Ave
 }
 
 # Rewards with distance-based adjustment
