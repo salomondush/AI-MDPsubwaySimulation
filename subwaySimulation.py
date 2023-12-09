@@ -32,18 +32,18 @@ class SubwayLine:
         return self.name
     
 # Subway stations
-coney_island = SubwayStation("Coney Island Station", 40.5763, -73.9755)
-j_st_metro_tech = SubwayStation("Jay Street Metro Tech Station", 40.6925, -73.9874)
-w_4_st_wash_sq = SubwayStation("West 4th Street Washington Square", 40.7326, -74.0002)
-one_four_5 = SubwayStation("145th Street", 40.8257, -73.9442)
-herald_sq = SubwayStation("34th Street Herald Square", 40.7495, -73.9872)
-times_sq = SubwayStation("Times Square - 42nd Street", 40.7552, -73.9867)
-canal_st = SubwayStation("Canal Street", 40.7195, -74.0014)
-union_sq = SubwayStation("14th Street Union Square", 40.7347, -73.9904)
-rock_ctr = SubwayStation("47th-50th Streets Rockefeller Center", 40.7587, -73.9815)
-de_kal = SubwayStation("De Kalb Avenue", 40.6901, -73.9818)
+coney_island = SubwayStation("Coney Island Station", 40.577760430189656, -73.97999295649412)
+j_st_metro_tech = SubwayStation("Jay Street Metro Tech Station", 40.69204758503175, -73.98498376782335)
+w_4_st_wash_sq = SubwayStation("West 4th Street Washington Square", 40.73253311848584, -74.00044235617023)
+one_four_5 = SubwayStation("145th Street", 40.83419374298584, -73.94926049155865)
+herald_sq = SubwayStation("34th Street Herald Square", 40.749842751497916, -73.98762350805688)
+times_sq = SubwayStation("Times Square - 42nd Street", 40.75605614948771, -73.98710391552848)
+canal_st = SubwayStation("Canal Street", 40.719700439317876, -74.00143758220091)
+union_sq = SubwayStation("14th Street Union Square", 40.73467894122143, -73.99035475962178)
+rock_ctr = SubwayStation("47th-50th Streets Rockefeller Center", 40.759045012104984, -73.98108954399662)
+de_kal = SubwayStation("De Kalb Avenue", 40.69182616993852, -73.97380877906623)
 
-subway_stations = [coney_island, j_st_metro_tech, w_4_st_wash_sq, one_four_5, herald_sq, times_sq, canal_st, union_sq, rock_ctr]
+subway_stations = [coney_island, j_st_metro_tech, w_4_st_wash_sq, one_four_5, herald_sq, times_sq, canal_st, union_sq, rock_ctr, de_kal]
 # Subway lines
 line_f = SubwayLine("Line F")
 line_ac = SubwayLine("Line_AC")
