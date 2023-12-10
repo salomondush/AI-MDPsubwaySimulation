@@ -51,6 +51,7 @@ Once the optimal policy is found, the simulation prints the optimal route from S
 
 To run the simulation:
 - To run a test, run 'python3 subway_client.py' and choose test mode. Select the iteration type, start station, and number of runs you want the model to simulate. This will give you the average number of station visits, and goal state success rate.
+  
 - To run a test, run 'python3 subway_client.py' and choose normal mode. Select the iteration type and the start station according to the client. It will give you the optimal path.
 ## Note
 
