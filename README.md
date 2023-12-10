@@ -9,6 +9,8 @@ The subway system is structured as follows:
 - Station A is connected to Station B via Line 1, Station C via Line 2, and Station D via Line 5.
 - Station B is connected to Station A via Line 1, Station C via Line 4, and Station D via Line 3.
 - Station C is connected to Station A via Line 2 and Station B via Line 4.
+- Station D is connected to Station A via Line 5 and Station B via Line 3.
+
 
 The connections can be visualized as follows:
 
@@ -23,6 +25,9 @@ Station B -- Line 1 --> Station A
        
 Station C -- Line 2 --> Station A
        | -- Line 4 --> Station B
+
+Station D -- Line 5 --> Station A
+       | -- Line 3 --> Station B
 ```
 
 ## Simulation Process
