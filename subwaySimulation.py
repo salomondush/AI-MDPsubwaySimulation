@@ -1,32 +1,17 @@
-class SubwayStation:
-    def __init__(self, name):
-        self.name = name
-        self.lines = []
-
-    def __str__(self):
-        return self.name
-
-
-class SubwayLine:
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
-
-
+import random
+import subway_class as sc
 # Subway stations
-station_A = SubwayStation("Station A")
-station_B = SubwayStation("Station B")
-station_C = SubwayStation("Station C")
-station_D = SubwayStation("Station D")
+station_A = sc.SubwayStation("Station A")
+station_B = sc.SubwayStation("Station B")
+station_C = sc.SubwayStation("Station C")
+station_D = sc.SubwayStation("Station D")
 
 # Subway lines
-line_1 = SubwayLine("Line 1")
-line_2 = SubwayLine("Line 2")
-line_3 = SubwayLine("Line 3")
-line_4 = SubwayLine("Line 4")
-line_5 = SubwayLine("Line 5")
+line_1 = sc.SubwayLine("Line 1")
+line_2 = sc.SubwayLine("Line 2")
+line_3 = sc.SubwayLine("Line 3")
+line_4 = sc.SubwayLine("Line 4")
+line_5 = sc.SubwayLine("Line 5")
 
 # Connecting stations with lines (sample connections)
 station_A.lines = [line_1, line_2, line_5]
@@ -63,7 +48,6 @@ transition_probs = {
     # From Station D (Terminal state)
     (station_D, line_3, station_D): 1,  # Terminal state, no transition
 }
-
 # Rewards: (station, line, next_station) -> reward
 # the reward for staying at the terminal/destination station is set to 0.
 rewards = {
@@ -157,13 +141,35 @@ next_station = {
     (station_C, line_4): station_B,
 }
 
-# Print the optimal policy from source station to station_D
-current_station = station_C
-visited_stations = set()
-while current_station != station_D:
-    if current_station in visited_stations:
-        print("Infinite loop detected in policy. Please check your MDP parameters.")
-        break
-    visited_stations.add(current_station)
-    print(f"In {current_station}, take {policy[current_station]}")
-    current_station = next_station[(current_station, policy[current_station])]
+def random_traversal(start_station, end_station):
+    current_station = start_station
+    visited_stations = set()
+    num_visits = 0
+
+    while current_station != end_station:
+        num_visits+=1
+        if current_station in visited_stations:
+            print("Infinite loop detected in traversal.")
+            return [1, num_visits]
+        visited_stations.add(current_station)
+        possible_actions = actions[current_station]
+        random_action = random.choice(possible_actions)
+
+        print(f"In {current_station}, take {random_action}")
+
+        current_station = next_station[(current_station, random_action)]
+    return [2, num_visits]
+
+def value_iter(start_station, end_station):
+    current_station = start_station
+    visited_stations = set()
+    num_visits = 0
+    while current_station != end_station:
+        num_visits +=1
+        if current_station in visited_stations:
+            print("Infinite loop detected in policy. Please check your MDP parameters.")
+            return [1, num_visits]
+        visited_stations.add(current_station)
+        print(f"In {current_station}, take {policy[current_station]}")
+        current_station = next_station[(current_station, policy[current_station])]
+    return [2, num_visits]
