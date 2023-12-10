@@ -50,9 +50,8 @@ Once the optimal policy is found, the simulation prints the optimal route from S
 ## Running the Simulation
 
 To run the simulation:
-- On the last code block, modify `current_station` to the desired starting station. The options are `Station_A`, `Station_B`, `Station_C`, and `Station_D`
-- Simply execute the `subwaySimulation.py`script in a Python environment. The output will be printed to the console.
-
+- To run a test, run 'python3 subway_client.py' and choose test mode. Select the iteration type, start station, and number of runs you want the model to simulate. This will give you the average number of station visits, and goal state success rate.
+- To run a test, run 'python3 subway_client.py' and choose normal mode. Select the iteration type and the start station according to the client. It will give you the optimal path.
 ## Note
 
 This is a simple simulation and does not account for real-world complexities such as varying travel times, delays, or service disruptions. It is intended for educational purposes to demonstrate the concept of Markov Decision Processes.
